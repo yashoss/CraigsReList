@@ -20,7 +20,8 @@ process on a regular schedule.
 1. [Install Python 3.6](https://www.python.org/downloads/)
 2. [Install chromedriver 2.27](https://sites.google.com/a/chromium.org/chromedriver/)
 3. Run `pip install selenium` in the terminal for UNIX systems
-   Run `py.exe -m install selenium` in command prompt for Windows
+   Run `py.exe -m pip install selenium` in command prompt for Windows
    Add `sudo` as necessary
 4. Go into the `cl_renew.py` and edit the "email" and "password" fields leaving the quotation marks.
-5. Run the file by double clicking or from terminal.
+5. Edit the "/path/to/chromedriver" to match your path to your chrome driver.
+6. Run the file by double clicking or from terminal.
