@@ -14,7 +14,7 @@ def init_driver():
  
 
 def lookup(driver, email, pw):
-    driver.get("https://accounts.craigslist.org/login/home")
+    driver.get("/path/to/chromedriver")
     #query = "//input[@value='edit' AND @type='submit']"
     query = "//form[@class='manage renew']"
     try:
