@@ -7,41 +7,40 @@ from selenium.common.exceptions import TimeoutException
 from selenium.common.exceptions import ElementNotVisibleException 
  
 def init_driver():
-    driver = webdriver.Chrome(r"C:\Users\The Prophet\Desktop\chromedriver.exe")
+    driver = webdriver.Chrome(r"/PATH/TO/CHROMEDRIVER.EXT")
     driver.wait = WebDriverWait(driver, 10)
     return driver
  
  
 
-def lookup(driver, email, pw):
-    driver.get("/path/to/chromedriver")
-    #query = "//input[@value='edit' AND @type='submit']"
+def renew(driver, email, pw):
+    driver.get("https://accounts.craigslist.org/login/home")
     query = "//form[@class='manage renew']"
     try:
         user = driver.wait.until(EC.presence_of_element_located(
             (By.NAME, "inputEmailHandle")))
         pfield = driver.wait.until(EC.presence_of_element_located(
             (By.NAME, "inputPassword")))
-        button = driver.wait.until(EC.element_to_be_clickable(
-            (By.CLASS_NAME, "accountform-btn")))
         user.send_keys(email)
         pfield.send_keys(pw)
-        driver.wait
+        button = driver.wait.until(EC.element_to_be_clickable(
+            (By.CLASS_NAME, "accountform-btn")))
         button.click()
-        driver.wait
-        rep =  driver.find_elements_by_xpath(query)
-        driver.wait
-        while(len(rep) > 0):
-            rep[0].submit()
-            driver.wait
+        time.sleep(2)
+        rep =  driver.wait.until(EC.presence_of_element_located(
+            (By.XPATH, query)))
+        while(rep):
+            rep.submit()
+            time.sleep(4)
             driver.back()
-            driver.wait
-            rep =  driver.find_elements_by_xpath(query)
+            time.sleep(8)
+            rep =  driver.wait.until(EC.presence_of_element_located(
+                (By.XPATH, query)))
     except TimeoutException:
         print("No more renews")
  
 if __name__ == "__main__":
     driver = init_driver()
-    lookup(driver, "email", "password")
+    renew(driver, "EMAIL", "PASSWORD")
     time.sleep(10)
-    #driver.quit()
+    driver.quit()
