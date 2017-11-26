@@ -15,7 +15,7 @@ def init_driver():
 
 def renew(driver, email, pw):
     driver.get("https://accounts.craigslist.org/login/home")
-    query = "//form[@class='manage renew']"
+    query = "//form[@class='managebtn' and @value='repost']"
     try:
         user = driver.wait.until(EC.presence_of_element_located(
             (By.NAME, "inputEmailHandle")))
